@@ -1,0 +1,106 @@
+
+ 
+   <div class="d-flex">
+
+    <div class="box ">
+      <div class="col-sm-10 offset-sm-1">
+<h1>Add Products.</h1>
+        <form #form="ngForm" (ngSubmit)="addProduct(form);">
+
+            <div>
+              
+              <label for="productType">Type of Shoe :    </label>
+                <select ngModel #productType="ngModel" name="productType" required>
+                  <option>Sneakers</option>
+                  <option>Boots</option>
+                  <option>Earth Shoe</option>
+                  <option>Loffer</option>
+                  <option>Crocs</option>
+                </select>
+                <div class="text-danger mt-2" *ngIf="productType.errors && productType.touched">
+                  <div *ngIf="productType.errors?.['required']">productType is required</div>
+                  <div *ngIf="productType.errors?.['pattern']">productType is invalid</div>
+              </div>
+            </div>
+            
+
+            <div>
+                <label for="productCategory">Category :  </label>
+                  <select ngModel #productCategory="ngModel" name="productCategory" required>
+                    <option>Men</option>
+                    <option>Women</option>
+                    <option>Kids</option>
+                  </select>
+                  <div class="text-danger mt-2" *ngIf="productCategory.errors && productCategory.touched">
+                    <div *ngIf="productCategory.errors?.['required']">productCategory is required</div>
+                    
+                </div>
+              </div>
+              <div>
+
+                <label for="quantity">Quantity</label>
+
+                <input ngModel #quantity="ngModel" type="number" name="quantity" class="form-control" required>
+                <div class="text-danger mt-2" *ngIf="quantity.errors && quantity.touched">
+                  <div *ngIf="quantity.errors?.['required']">quantity is required</div>
+                 
+              </div>
+            </div>
+
+            <div>
+
+                <label for="price">Price</label>
+
+                <input ngModel #price="ngModel" type="number" name="price" class="form-control" required>
+                <div class="text-danger mt-2" *ngIf="price.errors && price.touched">
+                  <div *ngIf="price.errors?.['required']">price is required</div>
+                  
+              </div>
+            </div>
+
+            <div>
+              <label for="productTmage">Upload Image</label>
+                <input ngModel #productImage="ngModel" type="file" name="productImage" class="form-control" required>
+                <div class="text-danger mt-2" *ngIf="productImage.errors && productImage.touched">
+                  <div *ngIf="productImage.errors?.['required']">productImage is required</div>
+                  
+              </div>
+            </div>
+<br>
+            <div class="d-grid mt-2">
+
+                <button class="btn btn-primary">Add to Stock</button>
+
+            </div>
+
+        </form>
+</div>
+    </div>
+
+
+
+<div class=" box">
+  <div class="col-sm-10 offset-sm-1"><h1>In-Stock</h1></div>
+  <div *ngFor="let product of stock">
+    <br>
+    <div class="d-flex">
+    <div class="type">{{product.productType}}   :</div>
+      <a  class="btn btn-primary"routerLink="/add-product-specification/{{product.id}}">Add specification</a>
+  </div>
+
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<a class=" btn1 btn btn-primary"routerLink="/productmaster" routerLinkActive="active">Back to Home</a>
+
+
+</div>
+
+</div>
