@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import jwt_decode from "jwt-decode";
+import { FormGroup } from '@angular/forms';	
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -10,12 +12,27 @@ import jwt_decode from "jwt-decode";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 	message: string = '';
-	constructor(private loginService:AuthService, private router:Router) { }
+	email!: FormControl<any>;
+	password!: FormControl<any>;
+	loginForm!: FormGroup<{ email: FormControl<any>; password: FormControl<any>; }>;
 
-	checkLogin(form: NgForm){
-		this.loginService.login(form.value).subscribe({
+	constructor(private loginService:AuthService, private router:Router) {
+		loginForm:FormGroup;
+		email:FormControl;
+		password:FormControl;
+	 }
+
+	ngOnInit(){
+		this.email= new FormControl('',[Validators.required,Validators.minLength(10)]);
+		this.password=new FormControl('',[Validators.required,Validators.minLength(8)]);
+		this.loginForm = new FormGroup({
+			'email':this.email,
+			'password':this.password
+	});}
+	checkLogin(loginForm:FormGroup){
+		this.loginService.login(loginForm.value).subscribe({
 			next: (res:any) => {
 				if(res.success){
 					localStorage.setItem('token', res.data);
@@ -40,4 +57,5 @@ export class LoginComponent {
 			}
 		});
 	}
-}
+	}
+

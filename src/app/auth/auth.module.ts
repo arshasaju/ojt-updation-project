@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AuthLayoutComponent } from './auth-layout.component';
 import { RegisterComponent } from './register/register.component';
 import { ProductMasterRegistrationComponent } from './product-master-registration/product-master-registration.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -20,7 +20,8 @@ import { ProductMasterRegistrationComponent } from './product-master-registratio
     CommonModule,
     AuthRoutingModule,
     FormsModule,
-    PublicModule
+    PublicModule,
+    ReactiveFormsModule
   ]
 })
 export class AuthModule { }
